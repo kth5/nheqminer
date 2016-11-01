@@ -1,3 +1,6 @@
 [submodule "nheqminer/external/equihash-xenon"]
 	path = nheqminer/external/equihash-xenon
 	url = https://github.com/xenoncat/equihash-xenon
+[submodule "Osx_cmake/nheqminer_cpu/fasm-osx"]
+	path = Osx_cmake/nheqminer_cpu/fasm-osx
+	url = https://github.com/JohnDDuncanIII/fasm-osx

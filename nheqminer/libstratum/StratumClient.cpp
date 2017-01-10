@@ -212,6 +212,7 @@ void StratumClient<Miner, Job, Solution>::disconnect()
 		BOOST_LOG_CUSTOM(info) << "Stopping miner";
         p_miner->stop();
     }
+
     m_socket.close();
     //m_io_service.stop();
     if (m_work) {

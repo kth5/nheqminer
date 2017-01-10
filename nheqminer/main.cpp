@@ -64,7 +64,7 @@ static ZcashStratumClientAVXCUDA75_SA* scSigAVXC75_SA = nullptr;
 static ZcashStratumClientSSE2CUDA75_SA* scSigSSE2C75_SA = nullptr;
 
 extern "C" void stratum_sigint_handler(int signum) 
-{ 
+{
 	if (scSigAVXC80_XMP) scSigAVXC80_XMP->disconnect();
 	if (scSigSSE2C80_XMP) scSigSSE2C80_XMP->disconnect();
 	if (scSigAVXC75_XMP) scSigAVXC75_XMP->disconnect();
@@ -73,6 +73,7 @@ extern "C" void stratum_sigint_handler(int signum)
 	if (scSigSSE2C80_SA) scSigSSE2C80_SA->disconnect();
 	if (scSigAVXC75_SA) scSigAVXC75_SA->disconnect();
 	if (scSigSSE2C75_SA) scSigSSE2C75_SA->disconnect();
+	exit(0);
 }
 
 void print_help()
@@ -209,6 +210,10 @@ void start_mining(int api_port, int cpu_threads, int cuda_device_count, int open
 
 	handler = &sc;
 	signal(SIGINT, stratum_sigint_handler);
+	signal(SIGTERM, stratum_sigint_handler);
+	signal(SIGKILL, stratum_sigint_handler);
+	signal(SIGUSR1, stratum_sigint_handler);
+	signal(SIGSTOP, stratum_sigint_handler);
 
 	int c = 0;
 	while (sc.isRunning()) {
